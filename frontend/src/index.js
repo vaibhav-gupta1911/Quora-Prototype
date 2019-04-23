@@ -5,7 +5,6 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
-import createSaga from "redux-saga";
 import { Provider } from "react-redux";
 import rootReducer from "./Reducers/index";
 

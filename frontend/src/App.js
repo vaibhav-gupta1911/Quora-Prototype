@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Route, Switch, BrowserRouter } from "react-router-dom";
-import Signup from "./Components/Signup/Signup";
-import Login from "./Components/Login/Login";
-import Interest from "./Components/Interests/Interests";
+import Signup from "./components/Signup/Signup";
+import Login from "./components/Login/Login";
+//import Interest from "./Components/Interests/Interests";
 import "./App.css";
 
 //App Component
@@ -16,7 +16,6 @@ class App extends Component {
           <Switch>
             <Route path="/signup" component={Signup} />
             <Route path="/login" component={Login} />
-            <Route path="/interests" component={Interest} />
           </Switch>
         </div>
       </BrowserRouter>
@@ -25,3 +24,5 @@ class App extends Component {
 }
 //Export the App component so that it can be used in index.js
 export default App;
+
+// <Route path="/interests" component={Interest} />

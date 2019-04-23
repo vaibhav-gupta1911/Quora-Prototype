@@ -14,7 +14,7 @@
   border-radius: 4px;
   padding-top: 10px;
   width: 650px;
-  height: 650px;
+  height: 600px;
   position: absolute;
   bottom: initial;
   left: 0;
@@ -48,11 +48,13 @@ label {
   letter-spacing: 0.5px;
   font-weight: bold;
   display: block;
+  margin-bottom: 15px;
 }
 
 .form-control {
   width: 100%;
   border: 1px solid #666;
+  margin-bottom: 10px;
   
 }
 

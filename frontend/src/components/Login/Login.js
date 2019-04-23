@@ -28,8 +28,8 @@ class Login extends Component {
   );
 
   //submit Login handler to send a request to the node backend
-  onSignup = values => {
-    // this.props.loginUser(values, this.props.history);
+  onLogin = values => {
+    this.props.loginUser(values, this.props.history);
     console.log("values ", values);
   };
 
@@ -42,7 +42,7 @@ class Login extends Component {
             <img src="//qsf.fs.quoracdn.net/-3-images.logo.wordmark_default.svg-26-bfa6b94bc0d6af2e.svg" />
             <h4>A place to share knowledge and better understand the world</h4>
             <h4>Login</h4>
-            <form onSubmit={handleSubmit(this.onSignup.bind(this))}>
+            <form onSubmit={handleSubmit(this.onLogin.bind(this))}>
               <div className="form-group">
                 <Field
                   label="Email"

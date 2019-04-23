@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ERRORS, SIGNUP, LOGIN_USER } from "./types";
-var setData = require("../Components/Localstorage").setData;
+var setData = require("../components/Localstorage").setData;
 
 export const signupUser = (signupdata, history) => dispatch => {
   console.log("checking data in backend", signupdata);
