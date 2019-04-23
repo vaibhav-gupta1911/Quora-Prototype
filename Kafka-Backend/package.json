@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "kafka-backend",
   "version": "1.0.0",
   "description": "`npm i` `npm start`",
   "main": "index.js",
