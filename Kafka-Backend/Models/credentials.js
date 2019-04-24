@@ -1,30 +1,42 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
-var credentials = new Schema ({
+var credentials = new Schema({
+  user: { type: Schema.Types.ObjectId, ref: "userDetails" },
+  handle: { type: String, required: true, max: 40 },
+  location: { type: String },
+  status: { type: String, required: true },
+  skills: {
+    type: [String]
+  },
+  bio: { type: String },
+  education: [
+    {
+      school: { type: String, required: true },
+      concentration: { type: String },
+      degree: { type: String },
+      from: { type: Date, required: true },
+      to: { type: Date },
+      current: { type: Boolean, default: false },
+      description: { type: String }
+    }
+  ],
+  city: { type: String },
+  state: { type: String },
+  zipCode: { type: Number },
+  profileImage: { type: String },
+  experience: [
+    {
+      title: { type: String, required: true },
+      company: { type: String, required: true },
+      location: { type: String },
+      from: { type: Date, required: true },
+      to: { type: Date },
+      current: { type: Boolean, default: false },
+      description: { type: String }
+    }
+  ],
+  date: { type: Date, default: Date.now }
+});
 
-    education : [
-        {
-            school : { type: String }, 
-            concentration : { type: String }, 
-            degree : { type: String }, 
-            year : { type: String },    
-        }
-        ],
-        employment : [
-            {
-                position : { type: String }, 
-                company : { type: String }, 
-                startYear : { type: String }, 
-                endYear : { type: String },    
-          }
-        ],
-        topics : [{
-            type: String
-        }],
-    
-        userDetails: [{ user: { type: Schema.Types.ObjectId, ref: "userDetails" } }],
-        
-    });
-
-    module.exports = mongoose.model("credentials",credentials);
+module.exports = mongoose.model("credentials", credentials);
