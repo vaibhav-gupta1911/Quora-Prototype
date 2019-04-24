@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "`npm i` `npm start`",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
@@ -44,5 +44,6 @@
     "tds": "^0.1.0",
     "tedious": "^6.1.1",
     "uuid": "^3.3.2"
-  }
+  },
+  "devDependencies": {}
 }
