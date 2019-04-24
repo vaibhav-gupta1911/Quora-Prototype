@@ -1,20 +1,18 @@
 import { SIGNUP, LOGIN_USER } from "../Actions/types";
 const initialState = {
-  user: {}
+  token: {},
+  authenticated: true
 };
 export default function(state = initialState, action) {
   switch (action.type) {
-    case SIGNUP:
-      return {
-        ...state,
-        user: action.payload
-      };
     case LOGIN_USER:
+    console.log("Inside reducer login", action.payload);
+    if(action.payload){
       return {
         ...state,
-        user: action.payload
+        token: action.payload
       };
-
+    }
     default:
       return state;
   }
