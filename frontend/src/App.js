@@ -1,28 +1,29 @@
+/* eslint-disable no-redeclare */
 import React, { Component } from "react";
-import { Route, Switch, BrowserRouter } from "react-router-dom";
-import Signup from "./components/Signup/Signup";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./store";
+//import Signup from "./components/Signup/SignUp";
 import Login from "./components/Login/Login";
-//import Interest from "./Components/Interests/Interests";
+import Dashboard from "./components/Dashboard/Dashboard";
 import "./App.css";
 
-//App Component
 class App extends Component {
   render() {
     return (
-      //Use Browser Router to route to different pages
-      <BrowserRouter>
-        <div>
-          {/*Render Different Component based on Route*/}
-          <Switch>
-            <Route path="/signup" component={Signup} />
-            <Route path="/login" component={Login} />
-          </Switch>
-        </div>
-      </BrowserRouter>
+      <Provider store={store}>
+        <Router>
+          <div className="App">
+            <Switch>
+              <Route exact path="/login" component={Login} />
+              {/*<Route exact path="/signup" component={Signup} /> */}
+              <Route path="/" component={Dashboard} />
+            </Switch>
+          </div>
+        </Router>
+      </Provider>
     );
   }
 }
-//Export the App component so that it can be used in index.js
-export default App;
 
-// <Route path="/interests" component={Interest} />
+export default App;

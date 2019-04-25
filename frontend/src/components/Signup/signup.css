@@ -14,7 +14,7 @@
   border-radius: 4px;
   padding-top: 10px;
   width: 650px;
-  height: 600px;
+  height: 650px;
   position: absolute;
   bottom: initial;
   left: 0;
@@ -29,8 +29,8 @@ h1 {
   font-weight: 900;
   font-size: 8rem;
   color: #b92b27;
-  font-family: "q_serif", Georgia, Times, "Times New Roman",
-    "Hiragino Kaku Gothic Pro", "Meiryo", serif;
+  /* font-family: "q_serif", Georgia, Times, "Times New Roman",
+    "Hiragino Kaku Gothic Pro", "Meiryo", serif; */
   /*font-family: Arial, Helvetica, sans-serif;*/
 }
 
@@ -46,7 +46,6 @@ form {
   display: table;
   margin: 0px auto;
   width: 450px;
-  
 }
 
 label {
@@ -55,13 +54,12 @@ label {
   letter-spacing: 0.5px;
   font-weight: bold;
   display: block;
-  margin-bottom: 15px;
+  line-height: 2%;
 }
 
 .form-control {
   width: 100%;
   border: 1px solid #666;
-  margin-bottom: 10px;
 }
 
 .error {

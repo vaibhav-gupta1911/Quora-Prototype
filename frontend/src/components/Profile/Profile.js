@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import jwt_decode from "jwt-decode";
-import { getProfile } from "../../actions/profileAction";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
@@ -17,20 +16,7 @@ import "./Profile.css";
 class Profile extends Component {
   constructor() {
     super();
-    this.state = {
-      userData: "",
-      name: "",
-      email: "",
-      phone: "",
-      city: "",
-      country: "",
-      homeTown: "",
-      school: "",
-      company: "",
-      languages: "",
-      gender: "",
-      about: ""
-    };
+    this.state = {};
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
@@ -77,11 +63,6 @@ class Profile extends Component {
           about: response.data.about
         });
       });
-
-    //this.props.updateProfile(user);
-    /* profile(user).then(res => {
-      this.props.history.push(`/profile`);
-    });*/
   }
 
   /*componentWillMount() {
@@ -215,11 +196,6 @@ Profile.propTypes = {
 const mapStateToProps = state => ({
   auth: state.auth
 });
-/*
-export default connect(
-  mapStateToProps,
-  { updateProfile }
-)(withRouter(Profile)); */
 
 export default connect(
   mapStateToProps,

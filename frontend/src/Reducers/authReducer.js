@@ -6,13 +6,13 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
     case LOGIN_USER:
-    console.log("Inside reducer login", action.payload);
-    if(action.payload){
-      return {
-        ...state,
-        token: action.payload
-      };
-    }
+      console.log("Inside reducer login", action.payload);
+      if (action.payload) {
+        return {
+          ...state,
+          token: action.payload
+        };
+      }
     default:
       return state;
   }
