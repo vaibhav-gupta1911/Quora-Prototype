@@ -11,7 +11,8 @@ var userDetails = new Schema({
   state: { type: String },
   zipCode: { type: Number },
   profileImage: { typw: String },
-  status: { type: Boolean }
+  status: { type: Boolean },
+  topics: [{ topic: { type: Schema.Types.ObjectId, ref: "topic" } }]
 });
 
 module.exports = mongoose.model("userDetails", userDetails);

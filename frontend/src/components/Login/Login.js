@@ -73,33 +73,32 @@ class Login extends Component {
     );
   }
 }
-
 function validate(values) {
-  const errors = {};
-  if (!values.firstName) {
-    errors.firstName = "* Required";
-  }
-  if (!values.lastName) {
-    errors.lastName = "* Required";
-  }
-  if (!values.email) {
-    errors.email = "* Required";
-  } else if (!/\w+(\.|\w)+\w+@\w+([.-]?\w+)*\.(edu|com)/gi.test(values.email)) {
-    errors.email = "Please Sign up with a valid email id";
-  }
+  //   const errors = {};
+  //   if (!values.firstName) {
+  //     errors.firstName = "* Required";
+  //   }
+  //   if (!values.lastName) {
+  //     errors.lastName = "* Required";
+  //   }
+  //   if (!values.email) {
+  //     errors.email = "* Required";
+  //   } else if (!/\w+(\.|\w)+\w+@\w+([.-]?\w+)*\.(edu|com)/gi.test(values.email)) {
+  //     errors.email = "Please Sign up with a valid email id";
+  //   }
 
-  if (!values.password) {
-    errors.password = "* Required";
-  } else if (
-    !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{8,}$/g.test(
-      values.password
-    )
-  ) {
-    console.log("Invalid Password");
-    errors.password =
-      "Please enter a valid Password. (Minimum 8 characters, atleast 1 number, 1 uppercase and 1 lowercase letter and 1 special character)";
-  }
-  return errors;
+  //   if (!values.password) {
+  //     errors.password = "* Required";
+  //   } else if (
+  //     !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{8,}$/g.test(
+  //       values.password
+  //     )
+  //   ) {
+  //     console.log("Invalid Password");
+  //     errors.password =
+  //       "Please enter a valid Password. (Minimum 8 characters, atleast 1 number, 1 uppercase and 1 lowercase letter and 1 special character)";
+  //   }
+  return {};
 }
 
 const mapStateToProps = state => ({
@@ -107,7 +106,7 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default reduxForm({ mapStateToProps, validate, form: "login" })(
+export default reduxForm({ mapStateToProps, form: "login" })(
   connect(
     null,
     { loginUser }

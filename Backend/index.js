@@ -59,14 +59,18 @@ app.post("/uploadprofile", upload.array("photos", 5), (req, res) => {
 //import Routes
 const login = require("./routes/login");
 const signup = require("./routes/signup");
+const profile = require("./routes/profile");
 const question = require("./routes/question");
 const answer = require("./routes/answer");
 //use Routes
 app.use("/login", login);
 app.use("/signup", signup);
+app.use("/profile", profile);
 app.use("/question", question);
 app.use("/answer", answer);
 //start your server on posrt 3001
+//app.settings.env = "production";
+// console.log("env mode", app.settings.env);
 app.listen(port, () => {
   console.log("Server is running on port: " + port);
 });

@@ -5,14 +5,14 @@ var requireAuth = passport.authenticate("jwt", { session: false });
 const mongoose = require("mongoose");
 var Question = require("../../Kafka-Backend/Models/question");
 
+//post a new question from a user
 router.post("/", requireAuth, function(req, res) {
-  console.log("Inside question Get Request");
+  console.log("Inside question Post Request");
 
-  var finalResult = 0;
-  console.log("Inside question Get Request");
   console.log("Req Body : ", req.body);
   // const d = new Date().toISOString().slice(0, 10);
 
+  //search whether a question alread exists
   Question.findOne({ question: req.body.question })
     .then(question => {
       if (question) {
@@ -26,6 +26,8 @@ router.post("/", requireAuth, function(req, res) {
           postDate: new Date()
         });
         console.log(question);
+
+        //add a new question if not already exists
         question
           .save()
           .then(question => {
@@ -45,6 +47,7 @@ router.post("/", requireAuth, function(req, res) {
     });
 });
 
+// get all questions asked by a user
 router.get("/", requireAuth, (req, res) => {
   console.log(req.user.id);
   Question.find({ user: req.user.id }).then(question => {
