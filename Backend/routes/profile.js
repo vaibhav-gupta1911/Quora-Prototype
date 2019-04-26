@@ -9,7 +9,6 @@ const redis = require("redis");
 //autmtically connects localhost:6379
 const client = redis.createClient();
 
-//const query = "select status as status from Profile where user = req.user.id ";
 const query = "5cc15777f4a06b2a6077c317" ;
 //load credential model
 
@@ -18,13 +17,15 @@ const Profile = require("../../Kafka-Backend/Models/credentials");
 const User = require("../../Kafka-Backend/Models/userDetails");
 //load validation
 const validateProfileInput = require("../validation/profile");
+
 //get current user's profile
 
+ router.get(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
 
- console.log("Query_time");
-
-
-client.get(`profile:${query}`, function(err, value) {
+client.get(req.user.id , function(err, value) {
 
   if(err){
     return console.log(err);
@@ -33,15 +34,12 @@ client.get(`profile:${query}`, function(err, value) {
   if(value)
   {
     console.log("Redis Cache has required value :", value);
-    return console.log("Query_time");
+    res.status(200).json(value);
+    
   }
   else
   {
-    //console.log("Redis dones not have Cache has required value :");
-    router.get(
-      "/",
-      passport.authenticate("jwt", { session: false }),
-      (req, res) => {
+
         const errors = {};
         Profile.findOne({ user: req.user.id })
           .then(profile => {
@@ -58,6 +56,17 @@ client.get(`profile:${query}`, function(err, value) {
             //   JSON.stringify({ source: "Redis cache", value: res })
             // );
 
+            console.log("I am coming here and lets try for REDIS now");
+            console.log(req.user.id);
+            console.log(profile);
+            client.set(req.user.id, JSON.stringify(profile), function (err) {
+              if (err) callback(err);
+              else{ 
+                console.log("REDIS Set successful");
+             //     callback(null);
+              }
+          });
+
             console.log("profile==", profile);
             res.status(200).json(profile);
           }
@@ -71,9 +80,10 @@ client.get(`profile:${query}`, function(err, value) {
           })
           .catch(err => res.status(404).json(err));
       }
-    );
+
 
   }
+  );
 })
 
 // router.get(
