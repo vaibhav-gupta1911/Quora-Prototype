@@ -8,10 +8,10 @@ var Answer = require("../../Kafka-Backend/Models/answer");
 router.get("/", (req, res) => {
   const errors = {};
   console.log(req.query);
-  const answersFields = {};
+//  const answersFields = {};
 
-  answersFields.answer = "abc";
-  answersFields._id = "5cbfb135f2a460f63f4fee8c";
+  //answersFields.answer = "abc";
+  //answersFields._id = "5cbfb135f2a460f63f4fee8c";
   //answersFields.isAnnonymous = "true";
 
   console.log("fields ans", answersFields);
@@ -37,23 +37,19 @@ router.post("/", requireAuth, function(req, res) {
   console.log("Inside answer Post Request");
   console.log("Req Body : ", req.body);
 
+  
+
   console.log(req.body.question);
-  req.body.question = "abc";
 
-  req.body.question = "abc";
-  req.body.questionOwner = "Lucky";
-  req.body.isAnnonymous = true;
-  req.body.topic = "abc";
-  req.body.question = "5cbf8898e35ac3ef9251d64b";
-
-  var user = new Model({
+  var user = new Answer({
     _id: new mongoose.Types.ObjectId(),
     answer: req.body.answer,
     answerOwner: req.user.id,
-    question: req.body.question,
+    question: req.body.question,  
     isAnnonymous: req.body.isAnnonymous,
     answerDate: Date.now()
   });
+
 
   user.save().then(
     doc => {

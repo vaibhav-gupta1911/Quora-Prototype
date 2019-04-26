@@ -15,7 +15,19 @@ class Dashboard extends Component {
     super(props);
 
     this.state = {};
+
+    this.state = {
+      showPopup: false
+    };
   }
+
+  togglePopup() {
+    this.setState({
+      showPopup: !this.state.showPopup
+    });
+  }
+
+  
   //Dummy componenet did mount
   render() {
     return (
@@ -23,6 +35,48 @@ class Dashboard extends Component {
         <Navbar />
 
         <div className="page-content">
+
+        
+        <div>
+
+        <div className="card questionCard">
+  <div >
+  <div>
+  <span>
+    <div className="hover-menu ">
+      <div className="hover-menu-contents">
+        <Link to="#profileImage" className="navItemLink">
+          <span className="expanded">
+            <span className="photoWrapper">
+              <div id="#123">
+                <span className="photo-tooltip">
+                  <img
+                    className="profileImage"
+                    height="50px"
+                    width="50px"
+                    src={`https://qph.fs.quoracdn.net/main-thumb-70332528-50-qpikqkavbsrjbupveiqfitmnpiraxvsw.jpeg`}
+                  />
+                </span>
+              </div>
+            </span>       
+            <span> 
+            <Link to='/profile'>Laxmikant Pandhare.</Link><br/>  
+            </span>
+          
+          </span> 
+
+        </Link>
+      </div>
+    </div>  
+  </span>
+</div>
+  {/*below will get an pop up*/}
+    <Link to='/dashboard' onClick={this.togglePopup.bind(this)}>What is your question or link ?</Link>
+  </div>
+</div>
+
+        </div>
+        
           <Switch>
             <Route path="/home" component={Home} />
             <Route path="/Answer" component={Answer} />

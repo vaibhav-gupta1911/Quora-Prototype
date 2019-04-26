@@ -3,30 +3,96 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const passport = require("passport");
 
+//redis database
+const redis = require("redis");
+
+//autmtically connects localhost:6379
+const client = redis.createClient();
+
+//const query = "select status as status from Profile where user = req.user.id ";
+const query = "5cc15777f4a06b2a6077c317" ;
 //load credential model
 
-const Profile = require("../../../Kafka-Backend/Models/credentials");
+const Profile = require("../../Kafka-Backend/Models/credentials");
 //laod userDetails model
-const User = require("../../../Kafka-Backend/Models/userDetails");
+const User = require("../../Kafka-Backend/Models/userDetails");
 //load validation
 const validateProfileInput = require("../validation/profile");
 //get current user's profile
-router.get(
-  "/",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    const errors = {};
-    Profile.findOne({ user: req.user.id })
-      .then(profile => {
-        if (!profile) {
-          errors.noprofile = "There is no profile for this user";
-          return res.status(404).json(errors);
-        }
-        res.status(200).json(profile);
-      })
-      .catch(err => res.status(404).json(err));
+
+
+ console.log("Query_time");
+
+
+client.get(`profile:${query}`, function(err, value) {
+
+  if(err){
+    return console.log(err);
   }
-);
+
+  if(value)
+  {
+    console.log("Redis Cache has required value :", value);
+    return console.log("Query_time");
+  }
+  else
+  {
+    //console.log("Redis dones not have Cache has required value :");
+    router.get(
+      "/",
+      passport.authenticate("jwt", { session: false }),
+      (req, res) => {
+        const errors = {};
+        Profile.findOne({ user: req.user.id })
+          .then(profile => {
+
+            if (!profile) {
+              errors.noprofile = "There is no profile for this user";
+              return res.status(404).json(errors);
+            }
+            else{
+            
+            // client.setex(
+            //   'query',
+            //   3600,
+            //   JSON.stringify({ source: "Redis cache", value: res })
+            // );
+
+            console.log("profile==", profile);
+            res.status(200).json(profile);
+          }
+
+            // client.setex(query, 10, function(err){
+            //   if(err){
+            //     console.log(err);
+            //     return console.log(err);
+            //   }
+            // });
+          })
+          .catch(err => res.status(404).json(err));
+      }
+    );
+
+  }
+})
+
+// router.get(
+//   "/",
+//   passport.authenticate("jwt", { session: false }),
+//   (req, res) => {
+//     const errors = {};
+//     Profile.findOne({ user: req.user.id })
+//       .then(profile => {
+//         console.log(req.user.id );
+//         if (!profile) {
+//           errors.noprofile = "There is no profile for this user";
+//           return res.status(404).json(errors);
+//         }
+//         res.status(200).json(profile);
+//       })
+//       .catch(err => res.status(404).json(err));
+//   }
+// );
 
 //create or edit user profile
 router.post(

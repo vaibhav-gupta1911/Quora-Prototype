@@ -50,13 +50,14 @@ router.post("/", function(req, res) {
   // this process will avoid SQL injection attack
 
   let sql = "SELECT emailid FROM userDetails WHERE emailid = ?";
+  
   connection.query(sql, req.body.email, function(error, results, fields) {
     if (error) {
       console.log(error);
     } else {
       const hashedPassword = bcrypt.hashSync(req.body.password);
       //hard coded values as FE is not developed well
-      req.body.city = "abc";
+      req.body.city = "abcd";
       req.body.state = "xyz";
       req.body.zipcode = 123;
       req.body.profileimage = "a";

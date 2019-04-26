@@ -1,13 +1,13 @@
 const mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
-var answer = new Schema({
+var answersDetails = new Schema({
   _id: mongoose.Schema.Types.ObjectId,
   //need reference of question too..check how to add that
   answer: { type: String },
   answerOwner: { type: String },
   isAnnonymous: { type: Boolean },
-  question: { question: { type: Schema.Types.ObjectId, ref: "question" } },
+  question: { type: Schema.Types.ObjectId, ref: "question" } ,
   // question:{type:String},
   upVote: [{ user: { type: Schema.Types.ObjectId, ref: "userDetails" } }],
   downVote: [{ user: { type: Schema.Types.ObjectId, ref: "userDetails" } }],
@@ -20,4 +20,4 @@ var answer = new Schema({
   answerDate: { type: Date }
 });
 
-module.exports = mongoose.model("answer", answer);
+module.exports = mongoose.model("answerdetails", answersDetails);
