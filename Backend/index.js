@@ -19,6 +19,7 @@ var login = require('./routes/login');
 var signup = require('./routes/signup');
 var question = require('./routes/question');
 var answer = require('./routes/answer');
+var message = require('./routes/message');
 
 
 //use cors to allow cross origin resource sharing
@@ -62,6 +63,14 @@ app.use('/users/login', login);
 app.use('/users/signup', signup);
 app.use('/users/question', question);
 app.use('/users/answer', answer);
+
+// app.use("/inbox/peopledetails", message.getPeopleDetails);
+// app.use("/inbox/sendmessage", message.sendMessage);
+// app.use("/inbox/displaymessages", message.displayMessages);
+// app.use("/inbox/reply", message.replyMessages);
+
+app.use("/inbox", message);
+
 
 //Storing documents/Images
 const storage = multer.diskStorage({

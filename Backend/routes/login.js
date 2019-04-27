@@ -116,8 +116,12 @@ router.post('/', function (req, res) {
             };
             //sign Token
             jwt.sign(payload, "secret", { expiresIn: "1h" }, (err, token) => {
-              res.json({
+              var data={
+                email: user.email,
                 token: "Bearer " + token
+              }
+              res.json({
+                data: data
               });
               console.log("Bearer " + token);
             });

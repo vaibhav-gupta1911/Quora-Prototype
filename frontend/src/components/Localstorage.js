@@ -4,7 +4,7 @@ module.exports.setData = (data, tokendata, type) => {
   var receivedData = JSON.stringify(data);
   //Storing token in the local storage
   localStorage.setItem("token", JSON.stringify(tokendata));
-  //localStorage.setItem("local_storage", receivedData);
+  // localStorage.setItem("local_storage", receivedData);
   //localStorage.setItem("usertype", type);
 };
 
