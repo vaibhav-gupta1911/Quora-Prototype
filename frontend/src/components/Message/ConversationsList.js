@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import { displayMessages } from "../../Actions/MessageAction";
+import { fetchPeople, setMessage, sendMessage, displayMessages } from "../../Actions/MessageAction";
 import _ from "lodash";
 import { connect } from "react-redux";
 import "./Message.css";
@@ -12,53 +12,74 @@ class ConversationsList extends Component {
     console.log(email);
     const data = { email: email };
     console.log(data);
-    // this.props.displayMessages(data);
+    this.props.displayMessages(data);
+
+    // localStorage.setItem("email", "lucky.singh@gmail.com");
+    //     const email = localStorage.getItem("email");
+    //     const data = {
+    //       email: email
+    //     };
+    //     console.log("email LOG", data);
+        this.props.fetchPeople(data);   //this.props.message.people
   }
-  // createMessage = (e) => {
-  //   e.preventDefault();
-  //       // if(localStorage.getItem("type")==="student")
-  //       // this.props.history.push(`/student/inbox/createmessage`);
-  //       // else
-  //       // this.props.history.push(`/teacher/inbox/createmessage`);
-  //       this.props.history.push(`/home/inbox/createmessage`);
-  // };
-  displayMessages = (e) => {
-    e.preventDefault();
-    this.props.history.push(`/home/inbox/displaymessages`);
-  }
-  createMessage = (e) => {
-    e.preventDefault();
-    this.props.history.push(`/home/inbox/createmessage`);
+  onChangeHandler = (e) => {
+    console.log("INSIDE CHANGE HANDLER");
+    this.props.setMessage({
+      [e.target.name]: e.target.value
+    });
   };
+  sendMessage = (e) => {
+    console.log("inside sendMessage API CALL");
+    console.log("this.props.messagedetails.receiver", this.props.message.messagedetails);
+    // console.log(this.props.messagedetails.subject);
+    // console.log(this.props.messagedetails.message);
+    e.preventDefault();
+    localStorage.setItem("email", "lucky.singh@gmail.com");   //Lucky@123
+    var em = localStorage.getItem("email");
+    console.log(em);
+    const data = {
+        //sender: em, receiver, subject, message, date
+        sender: em,
+        receiver: this.props.message.messagedetails.receiver,
+        message: this.props.message.messagedetails.message,
+        date: Date(Date.now())
+    };
+    console.log("data", data);
+    this.props.sendMessage(data, this.props.history);
+};
+  
   render() {
-    // let route ="home/inbox";
-    //     console.log("this.props.message.viewmessages", this.props);
-    //     let _id=this.props.match.params;
-    //     console.log("params: ", _id);
-    //     let details = (this.props.message.viewmessages||[]).map((d) => {
-    //       return (
-    //           <div class="small">
-    //             <Link to={`/${route}/${d._id}`}>
-    //             <tr>
-    //               <td>Sender: {d.originalsender}</td>
-    //               </tr>
-    //               <tr>
-    //               <td>Receiver: {d.originalreceiver}</td>
-    //               </tr>
-    //               <tr>
-    //               <td>Time: {d.date}</td>
-    //               </tr>
-    //             <tr>
-    //               <td>Subject: {d.subject}</td>
-    //             </tr>
-    //             <tr>
-    //               {/* <td>Message: {d.messages}</td> */}
-    //             </tr>
-    //             </Link>
-    //             <hr/>
-    //             </div>
-    //       );
-    //     });
+    console.log("this.props.message: ", this.props.message);
+      let details = this.props.message.people.map((m) => {
+        return (
+                <option value={m.email}>{m.name}</option>
+            );
+        });
+    let route ="home/inbox";
+        console.log("this.props.message.viewmessages", this.props);
+        let _id=this.props.match.params;
+        console.log("params: ", _id);
+        let details2 = (this.props.message.viewmessages||[]).map((d) => {
+          return (
+              <div class="small">
+                <Link to={`/${route}/${d._id}`}>
+                <tr>
+                  <td>Sender: {d.originalsender}</td>
+                  </tr>
+                  <tr>
+                  <td>Receiver: {d.originalreceiver}</td>
+                  </tr>
+                  <tr>
+                  <td>Time: {new Date(d.date).toLocaleString()}</td>
+                  </tr>
+                <tr>
+                  {/* <td>Message: {d.messages}</td> */}
+                </tr>
+                </Link>
+                <hr/>
+                </div>
+          );
+        });
     return (
       // <div id="content">
       //   <div className="container">
@@ -100,6 +121,7 @@ class ConversationsList extends Component {
                 </button>
               </div>
               <div class="modal-body" style={{ height: "500px" }}>
+              {details2}
                 <div>
                 </div>
               </div>
@@ -126,18 +148,20 @@ class ConversationsList extends Component {
               <div class="modal-body" style={{ height: "500px" }}>
                 <form>
                   <div class="form-group" style={{marginLeft: "-60px", marginRight: "-60px"}}>
-                    {/* <label for="recipient-name" class="col-form-label">Recipient:</label> */}
-                    <input type="text" class="form-control" style={{border:"1px solid #e2e2e2"}} placeholder="Enter a name" id="recipient-name" />
+                    <input type="text" class="form-control" style={{border:"1px solid #e2e2e2"}} name="receiver" onChange={this.onChangeHandler} placeholder="Enter a name" id="recipient-name" list="people" />
+                    <datalist id="people">
+                      {details}
+                    </datalist>
                   </div>
                   <div class="form-group" style={{marginTop:"-40px", marginLeft: "-60px", marginRight: "-60px"}} >
                     {/* <label for="message-text" class="col-form-label">Message:</label> */}
-                    <textarea class="form-control" style={{border:"1px solid #e2e2e2", resize:"none", width:"100%", minHeight:"140px"}} placeholder="Type a message..." id="message-text"></textarea>
+                    <textarea class="form-control" name="message" onChange={this.onChangeHandler} style={{border:"1px solid #e2e2e2", resize:"none", width:"100%", minHeight:"140px"}} placeholder="Type a message..." id="message-text"></textarea>
                   </div>
                 </form>
               </div>
               <div class="modal-footer" style={{ height: "20px", marginBottom: "50px" }}>
                 <button type="button" id="messagesClose" style={{ marginTop: "80px", background:"transparent", color:"#949494", display:"inline-block", cursor:"pointer", fontSize:"15px", fontWeight:"normal", lineHeight:"1.4" }} class="btn" data-dismiss="modal">Back</button>
-                <button type="button"  class="btn btn-primary" style={{borderRadius:"3px", fontWeight:"bold", background:"#3e78ad", color:"#fff", border:"1px solid #3a66ad"}}>Send</button>
+                <button type="button" data-toggle="modal" data-target="#exampleModal2" onClick={this.sendMessage} class="btn btn-primary" style={{borderRadius:"3px", fontWeight:"bold", background:"#3e78ad", color:"#fff", border:"1px solid #3a66ad"}}>Send</button>
               </div>
             </div>
           </div>
@@ -149,4 +173,4 @@ class ConversationsList extends Component {
 function mapStateToProps(state) {
   return { message: state.message };
 }
-export default connect(mapStateToProps, { displayMessages })(ConversationsList);
+export default connect(mapStateToProps, { fetchPeople, setMessage, sendMessage, displayMessages })(ConversationsList);

@@ -15,7 +15,7 @@ class CreateMessage extends Component {
           email: email
         };
         console.log("email LOG", data);
-        this.props.fetchPeople(data);
+        // this.props.fetchPeople(data);
       }
     onChangeHandler = (e) => {
         this.props.setMessage({
@@ -44,7 +44,7 @@ class CreateMessage extends Component {
             date: Date(Date.now())
         };
         console.log("data", data);
-        this.props.sendMessage(data, this.props.history);
+        // this.props.sendMessage(data, this.props.history);
     };
   render() {
       console.log("this.props.message: ", this.props.message);

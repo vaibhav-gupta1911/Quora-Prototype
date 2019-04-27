@@ -58,6 +58,7 @@ class Inbox extends Component {
     console.log("data sent to action", data);
     this.props.replyMessages(data, this.props.history);
   };
+  
   render() {
     let _id = ((this.props.match || {}).params || {})._id;
     console.log("hellloooooo ID: ", _id);

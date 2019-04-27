@@ -66,8 +66,9 @@ export const sendMessage=(data, history) => dispatch =>{
 };
 
 export const setMessage=(data) =>dispatch=>{
+  console.log("set message: ", data);
   dispatch({
-    type: SEND_MESSAGE,
+    type: SET_MESSAGE,
   payload: data
   })
 }

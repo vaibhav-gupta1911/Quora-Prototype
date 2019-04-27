@@ -3,6 +3,8 @@ var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
 var bcrypt = require('bcrypt-nodejs');
+var mongooseTypes = require('mongoose').Types;
+const mongoose = require('mongoose');
 //Passport authentication
 
 var passport = require('passport');
@@ -24,25 +26,29 @@ var controller = {};
 
 controller.getPeopleDetails = function (req, cb) {
     console.log("inside getPeopleDetails")
-    db.collection('userdetails').find({}).toArray((err, row) => {
-      if (err) {
-        cb(true,null)
-      } else {
-        console.log("rows: ", row);
-        for(var i=0; i<row.length; i++)
-        delete row[i].password;
-        console.log("data sent back: ", row);
-        cb(null, row);
-      }
-    })
+    // db.collection('userDetails').find({}).toArray((err, row) => {
+    UserModel.find({})
+        .then(row => {
+            console.log("rows: ", row);
+            for (var i = 0; i < row.length; i++)
+                delete row[i].password;
+            console.log("data sent back: ", row);
+            cb(null, row);
+        })
+        .catch(err => {
+            console.log("going inside catch")
+            cb(true, null)
+        })
 };
 
 router.get('/peopledetails', (req, res, next)=>{
     controller.getPeopleDetails(req, (err, row)=>{
         if(err){
+            console.log("status error");
             res.status(400);
         }
         else{
+            console.log("status success");
             res.status(200).send(row);
         }
     })
@@ -51,52 +57,52 @@ router.get('/peopledetails', (req, res, next)=>{
 controller.sendMessage = function (req, cb) {
         console.log("req.bod: ",req.body);
         let message=[{sender: req.body.sender, receiver: req.body.receiver, date: req.body.date, message:req.body.message}]
-      db.collection('inboxdetails').insertOne({
+    //   db.collection('inboxdetails').insertOne({
+        MessageModel.create({
+          _id: new mongoose.Types.ObjectId(),
           originalreceiver: req.body.receiver,
           originalsender:req.body.sender,
-          subject: req.body.subject,
           messages: message,
           date: req.body.date
-        }, (err, row)=>{
-          if (err) {
-            console.log("error in query storing");
+        })
+        .then(row=>{
+            console.log("data inserted into the database", row);
+            cb(null, row);
+        })
+        .catch(err=>{
+            console.log("error in query storing", err);
             cb(true,null)
-          } else {
-            console.log("data inserted into the database");
-            cb(null, row[0]);
-          }
-        }
-        );
+        })
   }
 
   router.post('/sendmessage', (req, res, next)=>{
     controller.sendMessage(req, (err, row)=>{
         if(err){
+            console.log("some error", err);
             res.status(400);
         }
         else{
-            res.status(200).send(row[0]);
+            console.log("sending data back", row)
+            res.status(200).send(row);
         }
     })
 });
 
 controller.displayMessages=function (req, cb) {
     console.log("display messages: ",req.body);
-    singletonDb.getInstance().then(db=>{
-      db.collection('inboxdetails').find({
+    //   db.collection('inboxdetails').find({
+        MessageModel.find({
           $or:[
                 {"messages.sender": req.body.email},
                 {"messages.receiver": req.body.email}
             ]
           })
-      .toArray()
       .then((row)=>{
           console.log("data sent back: ", row);
           cb(null, row);
       },(err)=>{
           cb(true,null)
       })
-    })
   };
 
   router.post('/displaymessages', (req, res, next)=>{
@@ -120,8 +126,8 @@ controller.replyMessages=function (req, cb) {
         date:req.body.date,
         message:req.body.newmessage
     }
-    singletonDb.getInstance().then(db=>{
-        db.collection('inboxdetails').findOneAndUpdate({
+        // db.collection('inboxdetails').findOneAndUpdate({
+            MessageModel.findOneAndUpdate({
             _id:ObjectId(req.body._id)
         }, {
             $push:{
@@ -136,7 +142,6 @@ controller.replyMessages=function (req, cb) {
         }, (err)=>{
             cb(true,null)
         })
-    })
   };
   router.post('/reply', (req, res, next)=>{
     controller.reply(req, (err, row1)=>{
