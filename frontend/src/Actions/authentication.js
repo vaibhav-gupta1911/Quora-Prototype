@@ -5,7 +5,7 @@ var setData = require("../components/Localstorage").setData;
 export const signupUser = (signupdata, history) => dispatch => {
   console.log("checking data in backend", signupdata);
   axios
-    .post(window.base_url + "/users/signup", signupdata)
+    .post(window.base_url + "/signup", signupdata)
     .then(res => {
       console.log("this is the data from back end", res.data);
       history.push("/interests");

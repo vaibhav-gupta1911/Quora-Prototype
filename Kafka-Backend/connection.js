@@ -2,7 +2,16 @@ const mysql = require("mysql");
 const mongoose = require("mongoose");
 
 //My SQl create connection
-const db = mysql.createConnection({
+// const db = mysql.createConnection({
+//   host: "quora273instance.ckkymcjvc8eq.us-east-2.rds.amazonaws.com",
+//   port: 3306,
+//   user: "quoraadmin",
+//   password: "quora273",
+//   database: "quora273db"
+// });
+
+var db = mysql.createPool({
+  connectionLimit: 100,
   host: "quora273instance.ckkymcjvc8eq.us-east-2.rds.amazonaws.com",
   port: 3306,
   user: "quoraadmin",
@@ -23,7 +32,7 @@ db.connect(function(err) {
 mongoose
   .connect(
     "mongodb+srv://canvas:canvas@cluster0-llr4m.mongodb.net/Quora?retryWrites=true",
-    { useNewUrlParser: true }
+    { useNewUrlParser: true, poolSize: 200 }
   )
   .then(() => console.log("Mongo connected"))
   .catch(err => console.log("error in Mongo connection:" + err));

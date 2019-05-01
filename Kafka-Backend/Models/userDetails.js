@@ -10,7 +10,7 @@ var userDetails = new Schema({
   city: { type: String },
   state: { type: String },
   zipCode: { type: Number },
-  profileImage: { typw: String },
+  profileImage: { type: String },
   status: { type: Boolean },
   topics: [{ topic: { type: Schema.Types.ObjectId, ref: "topic" } }]
 });

@@ -12,6 +12,7 @@ body {
   text-align: left;
   direction: ltr;
   box-sizing: border-box;
+  background-color: #fafafa;
 }
 a {
   text-decoration: none;
