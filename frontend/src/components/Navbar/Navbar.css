@@ -190,3 +190,8 @@
   margin: 0;
   display: inline-block;
 }
+
+a:hover {
+  text-decoration-line: none;
+  text-decoration: none;
+}

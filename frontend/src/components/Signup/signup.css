@@ -12,9 +12,8 @@
   border: 1px solid #e2e2e2;
   box-shadow: 0 0 5px #888;
   border-radius: 4px;
-  padding-top: 10px;
   width: 650px;
-  height: 600px;
+  height: 630px;
   position: absolute;
   bottom: initial;
   left: 0;
@@ -23,6 +22,8 @@
   overflow-y: hidden;
   top: 8%;
   text-align: center;
+  padding : 15px 0px;
+  
 }
 
 h1 {
@@ -45,8 +46,7 @@ h4 {
 form {
   display: table;
   margin: 0px auto;
-  width: 450px;
-  
+  width: 480px;
 }
 
 label {
@@ -56,12 +56,13 @@ label {
   font-weight: bold;
   display: block;
   margin-bottom: 15px;
+  
 }
 
 .form-control {
   width: 100%;
   border: 1px solid #666;
-  margin-bottom: 10px;
+  
 }
 
 .error {
@@ -72,4 +73,9 @@ label {
 
 .form-group {
   height: 80px;
+}
+
+.button{
+  margin-top: 25px;
+  line-height: 0px;
 }

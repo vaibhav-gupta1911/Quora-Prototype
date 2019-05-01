@@ -1,33 +1,61 @@
-/* .App {
-  text-align: center;
+/*quora*/
+* {
+  box-sizing: border-box;
 }
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+html {
+  font-weight: 400;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.4;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+body {
+  text-align: left;
+  direction: ltr;
+  box-sizing: border-box;
 }
-
-.App-link {
-  color: #61dafb;
+a {
+  text-decoration: none;
+  color: #2b6dad;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
+.u-flex {
+  display: flex !important;
+}
+.u-flex-row {
+  -webkit-box-orient: horizontal !important;
+  -webkit-box-direction: normal !important;
+  -ms-flex-direction: row !important;
+  flex-direction: row !important;
+}
+.u-flex-none {
+  -webkit-box-flex: 0 !important;
+  -ms-flex: none !important;
+  flex: none !important;
+}
+.u-flex-inline {
+  display: -webkit-inline-box !important;
+  display: -webkit-inline-flex !important;
+  display: -moz-inline-flex !important;
+  display: -ms-inline-flexbox !important;
+  display: inline-flex !important;
+}
+.u-flex-align--center {
+  -webkit-box-align: center !important;
+  -ms-flex-align: center !important;
+  align-items: center !important;
+}
+.u-margin-left--sm {
+  margin-left: 16px !important;
+}
+.u-margin-right--xs {
+  margin-right: 8px !important;
+}
+.u-flex-auto {
+  -webkit-box-flex: 1 !important;
+  -ms-flex: 1 1 auto !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+}
+.display-none {
+  display: none;
+}
