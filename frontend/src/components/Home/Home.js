@@ -1,23 +1,42 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
+import { connect } from "react-redux";
 import "../../App.css";
 import "./Home.css";
 import axios from "axios";
 import { Link, withRouter } from "react-router-dom";
 import HomeSideBar from "../HomeSideBar/HomeSideBar";
+//new vaibhav
+import Questions from "../Questions/questions";
+import { getQuestions } from "../../Actions/questionsAction";
+import PropTypes from "prop-types";
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = { showPopup: false };
   }
+  //new
+  componentDidMount() {
+    this.props.getQuestions();
+  }
+  //
   togglePopup() {
     this.setState({
       showPopup: !this.state.showPopup
     });
   }
   render() {
+    //new
+    const { questions } = this.props.questions;
+
+    if (questions === null) return <div />;
+
+    const questionsList = questions.map(question => (
+      <Questions question={question} />
+    ));
     //iterate over books to create a table row
+
     console.log("in course:" + this.props.match.params.Id);
     return (
       <div className="container container-fluid">
@@ -69,7 +88,9 @@ class Home extends Component {
                 </Link>
               </div>
             </div>
+            <div className="feed">{questionsList}</div>
           </div>
+
           <div className="col-md-2" />
         </div>
       </div>
@@ -77,4 +98,18 @@ class Home extends Component {
   }
 }
 
-export default withRouter(Home);
+Home.propTypes = {
+  getQuestions: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  questions: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  loginStateStore: state.auth,
+  questions: state.questions
+});
+
+export default connect(
+  mapStateToProps,
+  { getQuestions }
+)(withRouter(Home));
