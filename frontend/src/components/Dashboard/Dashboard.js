@@ -10,6 +10,8 @@ import Home from "../Home/Home";
 import Answer from "../Answer/Answer";
 import "../../App.css";
 import "./Dashboard.css";
+import ConversationsList from "../Message/ConversationsList";
+import CreateMessage from "../Message/CreateMessage";
 // import Questions from "../Questions/questions";
 // import { getQuestions } from "../../Actions/questionsAction";
 // import PropTypes from "prop-types";
@@ -44,6 +46,8 @@ class Dashboard extends Component {
           {/*questionsList*/}
           {
             <Switch>
+              <Route path="/home/inbox/createmessage" component={CreateMessage}/>
+            <Route path="/home/inbox" component={ConversationsList}/>
               <Route path="/home" component={Home} />
               <Route path="/Answer" component={Answer} />
               <Route path="/profile" component={Profile} />
