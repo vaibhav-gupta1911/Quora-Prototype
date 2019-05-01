@@ -83,6 +83,7 @@ app.use("/topic", topic);
 app.use("/profile", profile);
 app.use("/question", question);
 app.use("/answer", answer);
+// app.use("/all", profile1);
 //start your server on posrt 3001
 //app.settings.env = "production";
 // console.log("env mode", app.settings.env);

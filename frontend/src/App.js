@@ -18,7 +18,7 @@ class App extends Component {
         <Router>
           <div className="App">
             <Switch>
-              <Route path="/" component={Dashboard} />
+              
               <Route
                 exact
                 path="/login"
@@ -33,7 +33,7 @@ class App extends Component {
                 path="/interests"
                 render={props => <Interests {...props} />}
               />
-              
+              <Route path="/" component={Dashboard} />
             </Switch>
           </div>
         </Router>

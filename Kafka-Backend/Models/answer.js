@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 var Schema = mongoose.Schema;
-
 var answersdetail = new Schema({
   _id: mongoose.Schema.Types.ObjectId,
   //need reference of question too..check how to add that

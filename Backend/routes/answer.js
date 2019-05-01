@@ -4,15 +4,15 @@ var passport = require("passport");
 var requireAuth = passport.authenticate("jwt", { session: false });
 const mongoose = require("mongoose");
 var Answer = require("../../Kafka-Backend/Models/answer");
-var Question = require("../../Kafka-Backend/Models/question");
+var Question = require("../../Kafka-Backend/Models/questionsDetail");
 
 router.get("/", (req, res) => {
   const errors = {};
   console.log(req.query);
-  const answersFields = {};
+//  const answersFields = {};
 
-  answersFields.answer = "abc";
-  answersFields._id = "5cbfb135f2a460f63f4fee8c";
+  //answersFields.answer = "abc";
+  //answersFields._id = "5cbfb135f2a460f63f4fee8c";
   //answersFields.isAnnonymous = "true";
 
   console.log("fields ans", answersFields);

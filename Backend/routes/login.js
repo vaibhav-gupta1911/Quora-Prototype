@@ -8,6 +8,9 @@ const jwt = require("jsonwebtoken");
 const connection = require("../../Kafka-Backend/connection");
 var User = require("../../Kafka-Backend/Models/userDetails");
 
+//Kafka
+//var kafka = require('../kafka/client');
+
 router.post("/", (req, res) => {
   console.log("Inside Login Request");
   console.log("email:" + req.body.email);
@@ -70,115 +73,122 @@ router.post("/", (req, res) => {
     }
   );
 });
-module.exports = router;
 
 //Laxmi's Login with kafka
 
 ///Users/sachinwaghmode/Desktop/Quora-Team/Kafka-Backend/connection.js
-//Kafka
-//var kafka = require('../kafka/client');
+
 
 //Route to handle Post Request Call
 // router.post("/", function(req, res) {
 //   console.log("Inside Login Post Request");
 //   console.log("Req Body : ", req.body);
 
-//   // kafka.make_request('login', req.body, function(err, result){
+//   kafka.make_request('login', req.body, function(err, result){
 
-//   //   console.log('In results Signup');
-//   //   console.log('Results: ', result);
+//     console.log('In results Signup');
+//     console.log('Results: ', result);
 
-//   //   if(err){
-//   //     console.log('Unable to Login to the System.', err.message);
-//   //     res.writeHead(400, {
-//   //         'Content-type': 'text/plain'
-//   //     });
-//   //     res.end('Error in Login the application');
-//   //   }
-//   //   else{
-//   //     console.log('logged in successfully.', result);
-//   //     res.writeHead(200,{
-//   //         'Content-type' : 'application/json'
-//   //     });
-//   //     req.session.user = true;
-//   //     var token = jwt.sign({sjsuid:result.sjsuid}, secret, {
-//   //       expiresIn: 10080 // in seconds
-//   //     });
-//   //     console.log(token);
+//     if(err){
+//       console.log('Unable to Login to the System.', err.message);
+//       res.writeHead(400, {
+//           'Content-type': 'text/plain'
+//       });
+//       res.end('Error in Login the application');
+//     }
+//     else{
+//       console.log('logged in successfully.', result);
+//       res.writeHead(200,{
+//           'Content-type' : 'application/json'
+//       });
 
-//   //     var data = {
-//   //       result : result,
-//   //       Token : token
-//   //     }
+//       const payload = {
+//         id: result
+//       };
+//       //Sign the token with payload
+//                   jwt.sign(
+//                     payload,
+//                     "secret",
+//                     { expiresIn: "1h" },
+//                     (err, token) => {
+//                       res.json({
+//                         token: "Bearer " + token
+//                       });
+//                       console.log("Bearer " + token);
+//                     }
+//                   );
 
-//   //     res.end(JSON.stringify(data));
-//   //   }
+//       // var token = jwt.sign({sjsuid:result.sjsuid}, secret, {
+//       //   expiresIn: 10080 // in seconds
+//       // });
+//      // console.log(token);
 
-//   //   if(err){
-//   //       console.log("Unable to fetch user details. Error in Signup.", err);
-//   //       res.writeHead(400, {
-//   //           'Content-type': 'text/plain'
-//   //       });
-//   //       res.end('Error in fetching user details!');
-//   //   }
-//   // });
+//       // var data = {
+//       //   result : result,
+//       //   Token : token
+//       // }
 
-//   // //Mysql database connection
-//   // var connection = mysql.createConnection({
-//   //   host: "localhost",
-//   //   user: "root",
-//   //   password: "GHE@ta91",
-//   //   database : "Luckycmpe273"
-//   // });
+//       res.end(JSON.stringify(result));
+//     }
 
-//   // this process will avoid SQL injection attack
-//   let sql = "SELECT emailid,password FROM userDetails WHERE emailid = ?";
-
-//   console.log(req.body.email);
-
-//   connection.query(sql, req.body.email, function(error, results, fields) {
-//     // console.log(results[0]);
-//     if (error || results == null || results.length < 1) {
-//       console.log(error);
-//       res.value =
-//         "The email and password you entered did not match our records. Please try again.";
-//       console.log(res.value);
-//       //  callback(null, res);
-//     } else {
-//       if (bcrypt.compareSync(req.body.password, results[0].password)) {
-//         console.log("Valid Credentials");
-//         res.code = "200";
-//         res.value = results;
-//         console.log("login result", results);
-
-//         email = req.body.email;
-//         //Find user Query
-//         console.log("trying mongo");
-//         Model.findOne({ email }).then(user => {
-//           if (!user) {
-//             return res.status(404).json({ email: "User not found" });
-//           }
-
-//           const payload = {
-//             id: user.id
-//           };
-//           //sign Token
-//           jwt.sign(payload, "secret", { expiresIn: "1h" }, (err, token) => {
-//             res.json({
-//               token: "Bearer " + token
-//             });
-//             console.log("Bearer " + token);
-//           });
+//     if(err){
+//         console.log("Unable to fetch user details. Error in Signup.", err);
+//         res.writeHead(400, {
+//             'Content-type': 'text/plain'
 //         });
-
-//         //res.status(200).json(doc);
-//         //  callback(null, res);
-//       } else {
-//         console.log("InValid Credentials");
-//         res.code = "400";
-
-//         //callback(null, res);
-//       }
+//         res.end('Error in fetching user details!');
 //     }
 //   });
-// });
+
+  // let sql = "SELECT emailid,password FROM userDetails WHERE emailid = ?";
+
+  // console.log(req.body.email);
+
+  // connection.query(sql, req.body.email, function(error, results, fields) {
+
+  //   if (error || results == null || results.length < 1) {
+  //     console.log(error);
+  //     res.value =
+  //       "The email and password you entered did not match our records. Please try again.";
+  //     console.log(res.value);
+
+  //   } else {
+  //     if (bcrypt.compareSync(req.body.password, results[0].password)) {
+  //       console.log("Valid Credentials");
+  //       res.code = "200";
+  //       res.value = results;
+  //       console.log("login result", results);
+
+  //       email = req.body.email;
+  //       //Find user Query
+  //       console.log("trying mongo");
+  //       User.findOne({ email }).then(user => {
+  //         if (!user) {
+  //           return res.status(404).json({ email: "User not found" });
+  //         }
+
+  //         const payload = {
+  //           id: user.id
+  //         };
+  //         //sign Token
+  //         jwt.sign(payload, "secret", { expiresIn: "1h" }, (err, token) => {
+  //           res.json({
+  //             token: "Bearer " + token
+  //           });
+  //           console.log("Bearer " + token);
+  //         });
+  //       });
+
+        //res.status(200).json(doc);
+        //  callback(null, res);
+  //     } else {
+  //       console.log("InValid Credentials");
+  //       res.code = "400";
+
+  //       //callback(null, res);
+  //     }
+  //   }
+  // });
+//});
+
+module.exports = router;
