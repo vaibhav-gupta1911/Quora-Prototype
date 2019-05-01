@@ -9,6 +9,8 @@ var credentials = new Schema({
   skills: {
     type: [String]
   },
+  topics: [{ topic: { type: Schema.Types.ObjectId, ref: "topic" } }],
+
   bio: { type: String },
   education: [
     {

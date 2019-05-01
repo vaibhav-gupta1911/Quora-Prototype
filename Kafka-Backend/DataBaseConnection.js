@@ -18,24 +18,25 @@
 // ProfileImage:{type:String},
 // status:{type:Boolean},
     
+
 // });
 
 // var credentials = mongoose.model('credentials', {
 
 //     education : [
 //     {
-//         school : { type: String }, 
-//         concentration : { type: String }, 
-//         degree : { type: String }, 
-//         year : { type: String },    
+//         school : { type: String },
+//         concentration : { type: String },
+//         degree : { type: String },
+//         year : { type: String },
 //     }
 //     ],
 //     employment : [
 //         {
-//             position : { type: String }, 
-//             company : { type: String }, 
-//             startYear : { type: String }, 
-//             endYear : { type: String },    
+//             position : { type: String },
+//             company : { type: String },
+//             startYear : { type: String },
+//             endYear : { type: String },
 //       }
 //     ],
 //     topics : [{
@@ -46,9 +47,7 @@
 
 // });
 
-
 // module.exports = {
 //     Userdetails,
 //     credentials
 // };
-

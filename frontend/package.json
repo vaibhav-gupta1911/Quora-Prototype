@@ -9,6 +9,7 @@
     "glyphicons": "^0.2.0",
     "jquery": "^2.1.4",
     "jsonwebtoken": "^8.5.0",
+    "jwt-decode": "^2.2.0",
     "lodash": "^4.17.11",
     "mongodb": "^3.2.3",
     "react": "^16.8.6",
@@ -49,5 +50,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC"
 }

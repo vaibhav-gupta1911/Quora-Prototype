@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { Field, reduxForm } from "redux-form";
 import "./signup.css";
+import axios from "axios";
 import { connect } from "react-redux";
 var signupUser = require("../../Actions/authentication").signupUser;
 
@@ -81,7 +82,7 @@ class Signup extends Component {
                   name="password"
                   className="form-control"
                 />
-                <div>
+                <div className="button">
                   <button className="btn btn-primary">Sign Up</button>
                   <Link to="/login" style={{ display: "block" }}>
                     <span> Already have an account ? </span>
