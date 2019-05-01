@@ -8,7 +8,7 @@ export const signupUser = (signupdata, history) => dispatch => {
     .post(window.base_url+"/signup", signupdata)
     .then(res => {
       console.log("this is the data from back end", res.data);
-      history.push("/interests");
+    //  history.push("/interests");
     })
   .catch(err => {
     dispatch({
@@ -31,7 +31,7 @@ export const loginUser = (logindata, history) => dispatch => {
       });
   /***** Setting up the data in localstorage *****/
       setData(res.data.token);
-      history.push("/interests");
+    //  history.push("/interests");
     })
     .catch(err => {
       dispatch({

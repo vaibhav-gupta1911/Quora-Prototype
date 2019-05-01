@@ -2,26 +2,34 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const passport = require("passport");
+//var kafka = require('../kafka/client');
+
+var requireAuth = passport.authenticate("jwt", { session: false });
 
 //redis database
-const redis = require("redis");
+const redis = require("redis")
+
+// var cache = require('lru-cache')({  
+//   max : 100,                   // The maximum number of items allowed in the cache
+//   max_age : 1000 * 60 * 60     // The maximum life of a cached item in milliseconds
+// });
 
 //autmtically connects localhost:6379
 const client = redis.createClient();
 
-const query = "5cc15777f4a06b2a6077c317" ;
 //load credential model
-
 const Profile = require("../../Kafka-Backend/Models/credentials");
+
 //laod userDetails model
 const User = require("../../Kafka-Backend/Models/userDetails");
+
 //load validation
 const validateProfileInput = require("../validation/profile");
 
 //get current user's profile
 
  router.get(
-  "/",
+  "/", 
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
 
@@ -35,7 +43,6 @@ client.get(req.user.id , function(err, value) {
   {
     console.log("Redis Cache has required value :", value);
     res.status(200).json(value);
-    
   }
   else
   {
@@ -50,11 +57,6 @@ client.get(req.user.id , function(err, value) {
             }
             else{
             
-            // client.setex(
-            //   'query',
-            //   3600,
-            //   JSON.stringify({ source: "Redis cache", value: res })
-            // );
 
             console.log("I am coming here and lets try for REDIS now");
             console.log(req.user.id);
@@ -63,28 +65,60 @@ client.get(req.user.id , function(err, value) {
               if (err) callback(err);
               else{ 
                 console.log("REDIS Set successful");
-             //     callback(null);
               }
           });
 
             console.log("profile==", profile);
             res.status(200).json(profile);
-          }
-
-            // client.setex(query, 10, function(err){
-            //   if(err){
-            //     console.log(err);
-            //     return console.log(err);
-            //   }
-            // });
+           }
           })
           .catch(err => res.status(404).json(err));
       }
-
-
   }
   );
-})
+
+
+// client.get(req.user.id , function(err, value) {
+
+//   if(err){
+//     return console.log(err);
+//   }
+
+//   if(value)
+//   {
+//     console.log("Redis Cache has required value :", value);
+//     res.status(200).json(value);
+//   }
+//   else
+//   {
+//     console.log('i am in req.body: ', req.user.id );
+    
+//     kafka.make_request('profile', req.user, function(err, result){
+
+//     console.log('In results Signup');
+//     console.log('Results: ', result);
+
+
+
+//     if(err){
+//       console.log('Unable to fetch User details from the System.', err.message);
+//       res.writeHead(400, {
+//           'Content-type': 'text/plain'
+//       });
+//       res.end('Error in profile detail fetch the application');
+//     }
+//     else{
+//       console.log('profile fetched in successfully.', result);
+//       res.writeHead(200,{
+//           'Content-type' : 'application/json'
+//       });
+
+//       res.end(JSON.stringify(result));
+//      }
+//     });
+//    }
+//   });
+ })
 
 // router.get(
 //   "/",
@@ -147,6 +181,7 @@ router.post(
           { set: profileFields },
           { new: true }
         ).then(profile => res.json(profile));
+        //radis update
       } else {
         //create
         //check if the handle exists

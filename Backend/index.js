@@ -63,12 +63,14 @@ const signup = require("./routes/signup");
 const profile = require("./routes/profile");
 const question = require("./routes/question");
 const answer = require("./routes/answer");
+const profile1 = require("./routes/profile1");
 //use Routes
 app.use("/login", login);
 app.use("/signup", signup);
 app.use("/profile", profile);
 app.use("/question", question);
 app.use("/answer", answer);
+app.use("/all", profile1);
 //start your server on posrt 3001
 //app.settings.env = "production";
 // console.log("env mode", app.settings.env);

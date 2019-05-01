@@ -8,7 +8,7 @@ var Question = require("../../Kafka-Backend/Models/questionsDetail");
 router.post("/", requireAuth, function(req, res) {
   console.log("Inside question Get Request");
 
-  var finalResult = 0;
+  //var finalResult = 0;
   console.log("Inside question Get Request");
   console.log("Req Body : ", req.body);
   // const d = new Date().toISOString().slice(0, 10);
