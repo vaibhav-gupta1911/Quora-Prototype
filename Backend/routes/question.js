@@ -5,9 +5,8 @@ var requireAuth = passport.authenticate("jwt", { session: false });
 const mongoose = require("mongoose");
 var Question = require("../../Kafka-Backend/Models/question");
 
-//post a new question from a user
 router.post("/", requireAuth, function(req, res) {
-  console.log("Inside question Post Request");
+  console.log("Inside question Get Request");
 
   console.log("Req Body : ", req.body);
   // const d = new Date().toISOString().slice(0, 10);
@@ -47,12 +46,24 @@ router.post("/", requireAuth, function(req, res) {
     });
 });
 
-// get all questions asked by a user
-router.get("/", requireAuth, (req, res) => {
-  console.log(req.user.id);
-  Question.find({ user: req.user.id }).then(question => {
-    console.log(question);
-  });
+// router.get("/", requireAuth, (req, res) => {
+//   console.log(req.user.id);
+//   Question.find({ user: req.user.id }).then(question => {
+//     console.log(question);
+//   });
+// });
+
+router.get("/", (req, res) => {
+  console.log();
+  Question.find()
+    .populate("answers", ["answer", "upVote", "answerDate", "answerOwner"])
+    //.populate({ path: 'answers', populate: { path: 'answers.answerOwner', select: 'email' } })
+    //select: "answer upVote answerDate answerOwner" })
+    // .populate('answerOwner', ["email"])
+    .then(question => {
+      console.log(question);
+      res.json(question);
+    });
 });
 
 module.exports = router;
