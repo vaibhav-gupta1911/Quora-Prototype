@@ -21,6 +21,7 @@ var connection = mysql.createConnection({
 
 
 mongoose.connect('mongodb+srv://canvas:canvas@cluster0-llr4m.mongodb.net/Quora?retryWrites=true',
+// {useNewUrlParser: true, poolSize: 100})
 {useNewUrlParser: true})
 .then(() => console.log("Mongo COnnected"))
 .catch(err => console.log(err));
