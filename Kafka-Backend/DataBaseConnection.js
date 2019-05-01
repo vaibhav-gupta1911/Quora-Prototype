@@ -17,7 +17,6 @@
 // zipCode:{type:Number},
 // ProfileImage:{type:String},
 // status:{type:Boolean},
-    
 
 // });
 

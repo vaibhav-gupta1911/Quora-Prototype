@@ -30,12 +30,18 @@
   background-repeat: no-repeat;
   background-position: center center;
 }
-
+.bd {
+  position: absolute;
+  right: 3px;
+  top: 5px;
+  background-color: #b92b27;
+  color: #fff;
+  border-radius: 50%;
+}
 .headerInner {
   box-sizing: border-box;
   position: relative;
-  width: 1002px;
-
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -59,8 +65,9 @@
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  transition: opacity ease-in-out 100ms, color ease-in-out 100ms,
-    background-color ease-in-out 100ms, border-color ease-in-out 100ms;
+  transition: opacity ease-in-out 100ms,
+    color ease-in-out 100ms background-color ease-in-out 100ms,
+    border-color ease-in-out 100ms;
   border-radius: 3px;
   box-shadow: 0 1px 1px 0 rgba(200, 200, 200, 0.2);
   display: inline-block;

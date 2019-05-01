@@ -9,36 +9,21 @@ class HomeSideBar extends Component {
   render() {
     console.log("sidebarprops:" + this.props.id);
     return (
-      <div className="courseSideBar">
-        <div className="coursesidebarInner">
-          <ul>
-            <li className="rounded">
-              <Link to={`/courses/${this.props.id}/Home`}>Home</Link>
-            </li>
-            <li className="rounded">
-              <Link to={`/courses/${this.props.id}/Announcements`}>
-                Announcements
+      <div className="homeSidebarWrapper">
+        <div className="homeSidebarInner">
+          <ul className="sidebarList">
+            <li className="SwitcherItemWithImage">
+              <Link
+                to={`/courses/${this.props.id}/Home`}
+                className="swictherLink"
+              >
+                <div className="switcherImgWrapper">
+                  <div className="swictherImg" />
+                </div>
+                <label>Feed</label>
               </Link>
             </li>
-            <li className="rounded">
-              <Link to={`/courses/${this.props.id}/Assignments`}>
-                Assignments
-              </Link>
-            </li>
-            <li className="rounded">
-              <Link to={`/courses/${this.props.id}/Discussion`}>
-                Discussions
-              </Link>
-            </li>
-            <li className="rounded">
-              <Link to={`/courses/${this.props.id}/Grades`}>Grades</Link>
-            </li>
-            <li className="rounded">
-              <Link to={`/courses/${this.props.id}/People`}>People</Link>
-            </li>
-            <li className="rounded">
-              <Link to={`/courses/${this.props.id}/Files`}>Files</Link>
-            </li>
+            {/* apply map here for topic */}
           </ul>
         </div>
       </div>

@@ -30,8 +30,8 @@ h1 {
   font-weight: 900;
   font-size: 8rem;
   color: #b92b27;
-  font-family: "q_serif", Georgia, Times, "Times New Roman",
-    "Hiragino Kaku Gothic Pro", "Meiryo", serif;
+  /* font-family: "q_serif", Georgia, Times, "Times New Roman",
+    "Hiragino Kaku Gothic Pro", "Meiryo", serif; */
   /*font-family: Arial, Helvetica, sans-serif;*/
 }
 

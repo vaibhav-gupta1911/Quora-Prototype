@@ -14,17 +14,17 @@ class Navbar extends Component {
   render() {
     return (
       <div className="siteHeader">
-        <div className="headerInner u-flex u-flex-row">
-          <div className="headerLogo u-flex-none">
-            <Link to="">
+        <div className="container d-flex justify-content-between">
+          <div className="headerLogo">
+            <Link to="/home">
               <span className="display-none">Quora</span>
             </Link>
           </div>
-          <div className="headerContents u-flex u-flex-auto u-margin-left--sm">
+          <div className="d-flex justify-content-between">
             <div className="headerNav" role="navigation">
               <span>
                 <div className="sideHeaderNavItem">
-                  <Link to="#home" className="navItemLink">
+                  <Link to="/home" className="navItemLink">
                     <div className="u-margin-right-xs u-flex-inline">
                       <span
                         className="ui-icon ui-icon-color-grey icon-size-regular"
@@ -36,13 +36,14 @@ class Navbar extends Component {
                         />
                       </span>
                     </div>
+                    <span class="badge badge-light bd">4</span>
                     <span className="expanded">Home</span>
                   </Link>
                 </div>
               </span>
               <span>
                 <div className="sideHeaderNavItem">
-                  <Link to="#home" className="navItemLink">
+                  <Link to="/answer" className="navItemLink">
                     <div className="u-margin-right-xs u-flex-inline">
                       <span
                         className="ui-icon ui-icon-color-grey icon-size-regular"
@@ -57,7 +58,7 @@ class Navbar extends Component {
               </span>
               <span>
                 <div className="sideHeaderNavItem">
-                  <Link to="#home" className="navItemLink">
+                  <Link to="/spaces" className="navItemLink">
                     <div className="u-margin-right-xs u-flex-inline">
                       <span
                         className="ui-icon ui-icon-color-grey icon-size-regular"
